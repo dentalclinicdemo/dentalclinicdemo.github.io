@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dental Clinic Website Layout (Blue)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F0F7FD;--pri:#1275B7;--txt:#286FAE;--txt2:#2E71A5;--card:#F3F9FD;--sage:#E5F0FB;--line:#86AECB;--line2:#5B87A6;--acc:#0B7C8D;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--txt);font:400 16px/1.6 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.2;margin:0 0 .5em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--card);border-bottom:1px solid var(--line);z-index:5}
+header .wrap{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap}
+.logo{font-family:Fraunces,serif;font-weight:600;text-decoration:none;border:2px dashed var(--line);padding:2px 14px;border-radius:8px;margin-right:auto}
+nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+nav a,nav summary{padding:8px 12px;border-radius:8px;text-decoration:none;cursor:pointer;list-style:none;color:var(--txt2)}
+nav a:hover,nav summary:hover{background:var(--sage)}
+nav a.on{background:var(--pri);color:#fff}
+details{position:relative}
+details div{position:absolute;right:0;top:110%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px;display:grid;min-width:170px}
+.pg{display:none;padding:36px 0 72px}.pg.on{display:block}
+.btn{display:inline-block;background:var(--pri);color:#fff;padding:12px 26px;border-radius:999px;text-decoration:none;font-weight:600;border:0}
+.btn.alt{background:transparent;color:var(--pri);border:2px solid var(--pri)}
+.ph{background:var(--sage);border:2px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;color:var(--txt2);font-size:14px;padding:12px;min-height:90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.lines i{display:block;height:10px;background:var(--line);border-radius:6px;margin:8px 0;opacity:.6}.lines i:nth-child(2){width:85%}.lines i:nth-child(3){width:60%}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.sec{margin-top:56px}
+.hero{display:grid;gap:32px;grid-template-columns:1.1fr .9fr;align-items:center}
+.hero .ph{min-height:340px}
+.strip{display:flex;gap:16px;flex-wrap:wrap}.strip .ph{flex:1 1 140px;min-height:80px}
+.row{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.split{display:grid;gap:24px;grid-template-columns:1fr 1fr}
+.pill{display:inline-block;border:1px solid var(--pri);color:var(--pri);border-radius:999px;padding:1px 12px;font-size:13px}
+.emg{background:var(--acc);color:#fff;border-radius:14px;padding:22px}
+.emg .pill{border-color:#fff;color:#fff}
+footer{background:var(--pri);color:#fff;padding:36px 0}
+footer .wrap{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap}
+footer a{display:block;color:#fff}footer :focus-visible{outline-color:#fff}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.fab .list{display:none;flex-direction:column;gap:8px}.fab.open .list{display:flex}
+.fab button,.fab .list span{border:0;font:600 14px Figtree,sans-serif;cursor:pointer}
+.fab .main{width:58px;height:58px;border-radius:50%;background:var(--pri);color:#fff;font-size:22px}
+.fab .list span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:9px 16px;box-shadow:0 2px 8px #0002}
+.note{font-size:13px;color:var(--txt2);margin:0 0 20px}
+@media(max-width:760px){.hero,.split{grid-template-columns:1fr}.hero .ph{min-height:220px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="logo" href="#home">Clinic logo</a>
+<nav id="nav"></nav>
+</div></header>
+<main class="wrap" id="app"></main>
+
+<footer><div class="wrap">
+<div><b>Clinic name</b><div class="lines" style="width:200px"><i></i><i></i></div></div>
+<div id="fl"></div>
+<div><b>Social media</b><a href="#contact">Facebook</a><a href="#contact">Instagram</a></div>
+</div></footer>
+
+<div class="fab" id="fab">
+<div class="list"><span>Call clinic</span><span>Message us</span><span>Facebook</span><span>Instagram</span></div>
+<button class="main" aria-label="Contact and social media" aria-expanded="false">☎</button>
+</div>
+
+<script>
+const P=[["home","Home"],["about","About us"],["services","Services"],["dentists","Dentists"],["reviews","Reviews"],["location","Location"],["contact","Contact"]];
+const M=[["packages","Packages"],["results","Before & after"],["blog","Blog & offers"],["careers","Careers"],["emergency","Emergency"]];
+const ph=(t,h)=>`<div class="ph" style="${h?'min-height:'+h+'px':''}">${t}</div>`;
+const tx=()=>`<div class="lines"><i></i><i></i><i></i></div>`;
+const card=(t,extra='')=>`<div class="card">${ph(t,110)}<h3 style="margin-top:14px">Title</h3>${tx()}${extra}</div>`;
+const cards=(t,n,extra='')=>`<div class="grid">${Array(n).fill(0).map(()=>card(t,extra)).join('')}</div>`;
+const head=(t,note)=>`<h1>${t}</h1><p class="note">${note||''}</p>`;
+const book=`<a class="btn" href="#contact">Book now</a>`;
+const learn=`<p style="margin:14px 0 0"><a href="#about"><b>Learn more</b></a></p>`;
+const S={
+home:()=>`
+<section class="hero"><div><h1 style="font-size:clamp(2rem,5vw,3.2rem)">Headline</h1>${tx()}<p style="margin-top:22px">${book} <a class="btn alt" href="#services">See services</a></p></div>${ph("Clinic / dentist photo",340)}</section>
+<section class="sec"><h2>Awards and background</h2><div class="strip">${ph("Award")}${ph("Award")}${ph("Award")}${ph("Award")}</div></section>
+<section class="sec split"><div><h2>About the clinic</h2>${tx()}${tx()}${learn}</div>${ph("Photo",220)}</section>
+<section class="sec"><h2>Our dentists</h2>${cards("Photo",2,learn.replace("about","dentists"))}</section>
+<section class="sec"><div class="row"><h2>Services</h2><a class="btn alt" href="#services">More services</a></div>${cards("Icon",3,learn.replace("about","services"))}</section>
+<section class="sec"><h2>Reviews</h2>${cards("Rating",3)}</section>
+<section class="sec"><div class="row"><h2>Latest updates and offers</h2><a href="#blog"><b>All posts</b></a></div>${cards("Image",3)}</section>
+<section class="sec card split"><div><h2>Ready to visit?</h2>${tx()}</div><div style="align-self:center">${book}</div></section>`,
+about:()=>head("About us","Story, mission, clinic photos")+`<div class="split">${ph("Clinic photo",280)}<div>${tx()}${tx()}${tx()}</div></div><section class="sec"><h2>Awards</h2><div class="strip">${ph("Award")}${ph("Award")}${ph("Award")}</div></section><section class="sec"><h2>Clinic tour</h2>${cards("Photo",3)}</section><p class="sec">${book}</p>`,
+services:()=>head("Services","Each service: description, procedure, price")+cards("Icon",6,`<p style="margin:12px 0 0"><span class="pill">Price</span></p>${learn.replace("about","service-detail")}`)+`<p class="sec">${book}</p>`,
+"service-detail":()=>head("Service name","Detail page")+`<div class="split">${ph("Photo",260)}<div><span class="pill">Price</span>${tx()}${tx()}</div></div><section class="sec"><h2>Procedure</h2>${cards("Step",3)}</section><section class="sec"><h2>Related before and after</h2>${cards("Photo",2)}</section><p class="sec">${book}</p>`,
+packages:()=>head("Packages","Bundled offers")+cards("Package",3,`<p style="margin:12px 0 0"><span class="pill">Price</span></p>`)+`<p class="sec">${book}</p>`,
+results:()=>head("Before and after","Filter by procedure")+`<p><span class="pill">All</span> <span class="pill">Procedure</span> <span class="pill">Procedure</span></p><div class="grid">${Array(4).fill(`<div class="card"><div class="split">${ph("Before",160)}${ph("After",160)}</div><h3 style="margin-top:14px">Procedure</h3>${tx()}</div>`).join('')}</div>`,
+dentists:()=>head("Dentists","Photo, background, credentials, awards")+`<div class="grid">${Array(2).fill(`<div class="card">${ph("Portrait",240)}<h3 style="margin-top:14px">Dr. Name</h3>${tx()}<div class="strip" style="margin-top:12px">${ph("Award",50)}${ph("Award",50)}</div><p style="margin:14px 0 0">${book}</p></div>`).join('')}</div>`,
+reviews:()=>head("Reviews","Patient feedback")+cards("Rating",6)+`<p class="sec">${book}</p>`,
+blog:()=>head("Blog and offers","Recent updates and promos")+cards("Image",6),
+careers:()=>head("Careers","Open dentist positions")+`<div class="grid">${Array(3).fill(`<div class="card"><h3>Position</h3>${tx()}<p><span class="pill">Full time</span></p><a class="btn alt" href="#careers">Apply</a></div>`).join('')}</div>`,
+emergency:()=>head("Emergency dentist","One dentist always on call")+`<div class="emg"><span class="pill">On call today</span><h2 style="margin-top:12px">Dentist on duty</h2><div class="lines"><i></i><i></i></div><p><a class="btn" style="background:#fff;color:var(--acc)" href="#contact">Call now</a></p></div><section class="sec"><h2>What counts as an emergency</h2>${cards("Icon",3)}</section>`,
+location:()=>head("Location","Map, hours, directions")+`<div class="split">${ph("Map",340)}<div class="card"><h3>Address</h3>${tx()}<h3>Hours</h3>${tx()}<h3>How to get here</h3>${tx()}</div></div>`,
+contact:()=>head("Contact and booking","Appointment form, phone, social media")+`<div class="split"><form class="card" onsubmit="return false"><h3>Book an appointment</h3>${["Name","Phone","Service","Preferred date"].map(f=>`<p><label>${f}<br><input style="width:100%;padding:10px;border:1px solid var(--line2);border-radius:8px;background:var(--card);color:var(--txt)" aria-label="${f}"></label></p>`).join('')}<button class="btn">Book now</button></form><div class="card"><h3>Reach us</h3>${tx()}<div class="strip">${ph("Call",50)}${ph("Message",50)}${ph("Social",50)}</div></div></div>`
+};
+const nav=document.getElementById('nav'),app=document.getElementById('app');
+nav.innerHTML=P.map(([k,l])=>`<a href="#${k}" data-k="${k}">${l}</a>`).join('')+`<details><summary>More</summary><div>${M.map(([k,l])=>`<a href="#${k}" data-k="${k}">${l}</a>`).join('')}</div></details>`;
+document.getElementById('fl').innerHTML=[...P,...M].slice(1,9).map(([k,l])=>`<a href="#${k}">${l}</a>`).join('');
+function go(){const k=(location.hash||'#home').slice(1);const f=S[k]||S.home;app.innerHTML=`<div class="pg on">${f()}</div>`;
+nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.k===k||(k==='service-detail'&&a.dataset.k==='services')));
+nav.querySelector('details').open=false;scrollTo(0,0)}
+addEventListener('hashchange',go);go();
+const fab=document.getElementById('fab');fab.querySelector('.main').onclick=e=>{const o=fab.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',o)};
+</script>
+</body>
+</html>
